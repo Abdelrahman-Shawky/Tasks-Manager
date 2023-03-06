@@ -1,14 +1,17 @@
 <%- include('partials/header'); -%>
 
 <section>
-    <h1>Edit Task</h1>
-    <form action="/edit" method="POST">
-        <label for="task">Task</label>
-        <input type="text" name="taskContent" id="taskContent" value="<%= task.taskContent %>"> 
-        <input type="hidden" value="<%= task._id %>" name="taskId">
-        <button type="submit">Save</button>
-    </form>
-    <a href="/">Cancel</a>
+    <div class="new-task">
+        <form action="/edit" method="POST">
+            <h2>Edit Task</h2>
+            <div class="row">
+                <input class="task-field" type="text" name="taskContent" id="taskContent" value="<%= task.taskContent %>"> 
+                <input type="hidden" value="<%= task._id %>" name="taskId">
+                <button class="main-btn" type="submit">Save</button>
+            </div>
+        </form>
+        <a class="main-btn cancel" href="/">Cancel</a>
+    </div>
 
 </section>
 

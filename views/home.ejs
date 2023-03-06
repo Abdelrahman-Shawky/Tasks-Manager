@@ -1,30 +1,37 @@
 <%- include('partials/header'); -%>
 
-<header>
-    <h1>Tasks Manager</h1>
-</header>
-
-<section>
-    <form action="/add" method="POST">
-        <h2>New Task</h2>
-        <input type="text" name="task" required>
-        <button type="submit">Add Task</button>
-    </form>
-    <% if (taskList.length>0) { %>
-    <ul>
-        <% taskList.forEach( task => { %>
-            <li><%= task.taskContent %></li>
-            <a href="/edit/<%= task._id %>">Edit</a>
-            <form action="/delete" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-        <% }) %>
-    </ul>
-    <% } %>
-    <form action="/editModal" method="POST">
-        <button name="modal" value="open">Open</button>
-    </form>
-
+<section class="tasks">
+    <div class="new-task">
+        <form action="/add" method="POST">
+            <h2>New Task</h2>
+            <div class="row">
+                <input class="task-field" type="text" name="task" required>
+                <button type="submit" class="main-btn">Add Task</button>
+            </div>
+        </form>
+    </div>
+    <div class="content">
+        <% if (taskList.length>0) { %>
+            <% taskList.forEach( task => { %>
+                <div class="task-card">
+                    <div>
+                        <p class="task-item"><%= task.taskContent %></p>
+                    </div>
+                    <div class="btns">
+                        <a class="btn" href="/edit/<%= task._id %>">Edit</a>
+                        <form action="/delete" method="POST">
+                            <input type="hidden" value= "<%= task._id %>" name= "taskId">
+                            <button class="btn" type="submit">Delete</button>
+                        </form>
+                        <form action="/done" method="POST">
+                            <input type="hidden" value= "<%= task._id %>" name= "taskId">
+                            <button class="btn" type="submit">Done</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
 </section>
 
 

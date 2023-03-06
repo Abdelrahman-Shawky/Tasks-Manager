@@ -2,9 +2,8 @@ const Task = require('../models/Task');
 
 module.exports.getTasks = async (req, res) => {
     const taskList = await Task.find();
-    console.log(taskList);
     res.render('home', {
-        pageTitle: "Task Manager",
+        pageTitle: "Tasks Manager",
         taskList: taskList
     });
 }
@@ -25,7 +24,6 @@ module.exports.postAddTask = async (req, res) => {
 
 module.exports.getEditTask = async (req, res) => {
     const taskId = req.params.taskId;
-
     const task = await Task.findById(taskId);
     res.render('edit', {
         pageTitle: "Edit Task",
@@ -43,4 +41,25 @@ module.exports.postEditTask = async (req, res) => {
     console.log('Task Saved');
     res.redirect('/');
 }
+
+module.exports.postDeleteTask = async (req, res) => {
+    const taskId = req.body.taskId;
+    const task = await Task.findById(taskId);
+    await task.deleteOne();
+    console.log('Task Deleted');
+    res.redirect('/');
+}
+
+
+module.exports.postDoneTask = async (req, res) => {
+    const taskId = req.body.taskId;
+    const task = await Task.findById(taskId);
+    task.isDone = true;
+    task.save();
+    console.log('Task Comnpleted');
+    res.redirect('/');
+}
+
+
+
 
