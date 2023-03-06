@@ -54,9 +54,15 @@ module.exports.postDeleteTask = async (req, res) => {
 module.exports.postDoneTask = async (req, res) => {
     const taskId = req.body.taskId;
     const task = await Task.findById(taskId);
-    task.isDone = true;
+    if (task.isDone) {
+        task.isDone = false;
+        console.log('Task Uncomnpleted');
+    }
+    else {
+        task.isDone = true;
+        console.log('Task Comnpleted');
+    }
     task.save();
-    console.log('Task Comnpleted');
     res.redirect('/');
 }
 
