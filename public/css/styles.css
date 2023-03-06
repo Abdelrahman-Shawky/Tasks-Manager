@@ -105,6 +105,10 @@ align-items: center;
     padding: 50px 40px;
 }
 
+.done {
+    text-decoration: line-through;
+}
+
 .tasks .content {
     margin-top: 30px;
 }

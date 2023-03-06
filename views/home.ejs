@@ -15,17 +15,17 @@
             <% taskList.forEach( task => { %>
                 <div class="task-card">
                     <div>
-                        <p class="task-item"><%= task.taskContent %></p>
+                        <p class="task-item <% if(task.isDone) { %> done <% } %>"><%= task.taskContent %></p>
                     </div>
                     <div class="btns">
-                        <a class="btn" href="/edit/<%= task._id %>">Edit</a>
-                        <form action="/delete" method="POST">
-                            <input type="hidden" value= "<%= task._id %>" name= "taskId">
-                            <button class="btn" type="submit">Delete</button>
-                        </form>
+                        <a class="btn" href="/edit/<%= task._id %>"><i class="fa-solid fa-pen-to-square"></i></a>
                         <form action="/done" method="POST">
                             <input type="hidden" value= "<%= task._id %>" name= "taskId">
-                            <button class="btn" type="submit">Done</button>
+                            <button class="btn" type="submit"><i class="fa-solid fa-check"></i></button>
+                        </form>
+                        <form action="/delete" method="POST">
+                            <input type="hidden" value= "<%= task._id %>" name= "taskId">
+                            <button class="btn" type="submit"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </div>
                 </div>
